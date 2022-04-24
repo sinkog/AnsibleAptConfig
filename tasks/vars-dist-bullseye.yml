@@ -1,0 +1,7 @@
+---
+__apt_main_uri: "{{ apt_main_uri | default('http://ftp.hu.debian.org/debian') }}"
+__apt_updates_uri: "{{ __apt_main_uri }}"
+__apt_security_uri: "{{ apt_security_uri | default('http://deb.debian.org/debian-security/') }}"
+__apt_stores: "{{ apt_stores | default('main contrib') }}"
+__apt_updates_repo: "{{ apt_updates_repo | default('-updates') }}"
+__apt_security_repo: "{{ apt_security_repo | default('-security') }}"

@@ -1,0 +1,31 @@
+---
+- name: Include distribution specific variables
+  include: "vars-dist-{{ ansible_facts.distribution }}.yml"
+
+- name: Configure APT repositories
+  apt_repository:
+    update_cache: '{{ apt_update_cache }}'
+    repo: '{{ item.repo }}'
+    state: '{{ item.state }}'
+  with_items: '{{ apt_repositories }}'
+  become: true
+
+- name: Upgrade packages
+  apt:
+    update_cache: '{{ apt_update_cache }}'
+    upgrade: '{{ apt_upgrade }}'
+    autoclean: '{{ apt_autoclean }}'
+    autoremove: '{{ apt_autoremove }}'
+    force_apt_get: '{{ apt_force_apt_get }}'
+  become: true
+
+- name: install Base packages
+  apt:
+    update_cache: 'true'
+    force_apt_get: '{{ apt_force_apt_get }}'
+    name: '{{ item }}'
+    state: 'present'
+  loop: '{{ apt_base_packages + apt_packages }}'
+  become: true
+
+# tasks file for AptConfig

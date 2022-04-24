@@ -1,0 +1,30 @@
+---
+apt_install_recommends: 'no'
+apt_update_cache: 'yes'
+apt_force_apt_get: 'yes'
+apt_upgrade: 'full'
+apt_autoclean: 'yes'
+apt_autoremove: 'no'
+
+apt_base_packages:
+  - 'python3'
+  - 'lsb-release'
+  - 'apt-transport-https'
+  - 'ca-certificates'
+  - 'vim'
+  - 'etckeeper'
+  - 'locales'
+  - 'python3-pip'
+  - 'python3-docker'
+  - 'pass'
+  - 'gnupg2'
+
+apt_packages: []
+
+apt_repositories:
+  - repo: 'deb {{ __apt_main_uri }} {{ ansible_facts.distribution_release }} {{ __apt_stores }}'
+    state: 'present'
+  - repo: 'deb {{ __apt_updates_uri }} {{ ansible_facts.distribution_release }}{{ __apt_updates_repo }} {{ __apt_stores }}'
+    state: 'present'
+  - repo: 'deb {{ __apt_security_uri }} {{ ansible_facts.distribution_release }}{{ __apt_security_repo }} {{ __apt_stores }}'
+    state: 'present'

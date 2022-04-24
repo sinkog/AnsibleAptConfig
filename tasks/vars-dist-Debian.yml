@@ -1,0 +1,3 @@
+---
+- name: Include release specific variables
+  include_vars: "vars-dist-{{ ansible_facts.distribution_release }}.yml"
